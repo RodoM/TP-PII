@@ -8,13 +8,15 @@ class Personajes:
     for personaje in self.lista_personajes:
       print(f"ID: {personaje.id}, Nombre: {personaje.nombre}, Vida: {personaje.vida}")
 
-  def agregar_personaje(self, personaje):
+  def agregar_personaje(self):
     # pedir por input los datos de personaje, crearlo y agregarlo a la lista de personajes
     nombre = input("Ingrese el nombre del personaje: ")
     genero = input("Ingrese el genero del personaje: ")
     puntos = 10
+    # pj = Persanaje(nombre, genero)
+    # self.lista_personajes.append(pj)
     # Pregunte secuencialmente cuantos puntos asignar a cada atributo, al ultimo asignarle los puntos disponibles restantes
-
+    
   def usar_personaje(self, id):
     personaje = self.buscar_personaje_por_id(id)
     if personaje:
