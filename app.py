@@ -84,6 +84,9 @@ def crear_personaje():
   personajes.append(nuevo_personaje)
   print(f"Personaje {nombre} creado con éxito.")
 
+def menu_personaje():
+  print("\n1. Mostrar atributos\n2. Mostrar arma.\n3. Mostrar pociones.\n4. Pelear\n5. Salir")
+
 def seleccionar_personaje():
   opt = int(input("Ingrese el ID del personaje que desea utilizar: "))
   for personaje in personajes:
@@ -111,7 +114,26 @@ while True:
     crear_personaje()
   elif opt == "3":
     personaje_seleccionado = seleccionar_personaje()
-    # mostrar menu de personaje donde pueda atacar a otros
+    print(personaje_seleccionado)
+
+    while personaje_seleccionado:
+      menu_personaje()
+      opt2 = input("Seleccione una opción: ")
+
+      if opt2 == "1":
+        print(personaje_seleccionado.mostrar_atributos())
+      elif opt2 == "2":
+        print(personaje_seleccionado.arma)
+      elif opt2 == "3":
+        for i, pocion in enumerate(personaje_seleccionado.pociones, 1):
+          print(f"{i}. {pocion}")
+      elif opt2 == "4":
+        print("Atacaste :P")
+      elif opt2 == "5":
+        personaje_seleccionado = None
+      else:
+        print("Opción inválida.")
+
   elif opt == "4":
     eliminar_personaje()
   elif opt == "5":

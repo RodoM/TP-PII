@@ -20,6 +20,9 @@ class Personaje:
     self.vida = math.ceil(self.vida * self.tipo.bonif_vida)
     self.suerte = math.ceil(self.suerte * self.tipo.bonif_suerte)
 
+  def mostrar_atributos(self):
+    return f"Ataque: {self.ataque}, Defensa: {self.defensa}, Vida: {self.vida}, Suerte: {self.suerte}"
+
   # getters de tipo, arma y pociones.
 
   def __str__(self) -> str:
