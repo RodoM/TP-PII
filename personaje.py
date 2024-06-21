@@ -28,7 +28,7 @@ class Personaje:
     return self.ataque + self.arma.daño
 
   def recibir_ataque(self, cantidad):
-    self.vida -= max(0, cantidad - self.defensa)  # El daño recibido se reduce por la defensa
+    self.vida -= cantidad - self.defensa  # El daño recibido se reduce por la defensa
     if self.vida < 0:
       self.vida = 0
 
