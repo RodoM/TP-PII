@@ -1,5 +1,6 @@
 from datos import *
 
+
 def menu():
   print("\n1. Mostrar personajes\n2. Crear nuevo personaje\n3. Seleccionar personaje\n4. Eliminar personaje\n5. Salir")
 
@@ -94,6 +95,14 @@ def seleccionar_personaje():
       return personaje
   print("No existe ningún personaje con ese ID.")
 
+def combate(atacante, defensor):
+  daño = atacante.atacar()
+  defensor.recibir_ataque(daño)
+  print(f"{atacante.nombre} atacó a {defensor.nombre} con {atacante.arma.nombre} causando {daño} de daño.")
+  print(f"{defensor.nombre} tiene {defensor.vida} de vida restante.")
+  if defensor.vida <= 0:
+    print(f"{defensor.nombre} ha sido derrotado.")
+
 def eliminar_personaje():
   opt = int(input("Ingrese el ID del personaje que desea eliminar: "))
   for personaje in personajes:
@@ -128,7 +137,18 @@ while True:
         for i, pocion in enumerate(personaje_seleccionado.pociones, 1):
           print(f"{i}. {pocion}")
       elif opt2 == "4":
-        print("Atacaste :P")
+        print("Seleccione el personaje al que desea atacar:")
+        mostrar_personajes()
+        id_defensor = int(input("Ingrese el ID del personaje defensor: "))
+        defensor = None
+        for p in personajes:
+          if p.id == id_defensor:
+            defensor = p
+            break
+        if defensor:
+          combate(personaje_seleccionado, defensor)
+        else:
+          print("ID de personaje no válido.")
       elif opt2 == "5":
         personaje_seleccionado = None
       else:

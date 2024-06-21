@@ -22,6 +22,15 @@ class Personaje:
 
   def mostrar_atributos(self):
     return f"Ataque: {self.ataque}, Defensa: {self.defensa}, Vida: {self.vida}, Suerte: {self.suerte}"
+  
+  def atacar(self):
+    # Calcular daño basado en atributos del personaje y su arma
+    return self.ataque + self.arma.daño
+
+  def recibir_ataque(self, cantidad):
+    self.vida -= max(0, cantidad - self.defensa)  # El daño recibido se reduce por la defensa
+    if self.vida < 0:
+      self.vida = 0
 
   # getters de tipo, arma y pociones.
 
