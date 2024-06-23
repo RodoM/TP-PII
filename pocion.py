@@ -6,8 +6,5 @@ class Pocion:
     self.nombre = nombre
     self.curacion = curacion
 
-  def usar(self, personaje):
-    personaje.vida += self.curacion
-
   def __str__(self) -> str:
     return f"'{self.nombre}' curación: {self.curacion}."

@@ -1,4 +1,5 @@
 import math
+import random
 class Personaje:
   id_inicial = 1
   def __init__(self, nombre, genero, ataque, defensa, vida, suerte, tipo, arma, pociones) -> None:
@@ -31,6 +32,13 @@ class Personaje:
     self.vida -= cantidad - self.defensa  # El daño recibido se reduce por la defensa
     if self.vida < 0:
       self.vida = 0
+
+  def beber_pocion(self, pocion):
+    if random.random() > 0.20:
+      self.vida += self.pociones[pocion - 1].curacion
+      if self.vida > 100:
+        self.vida = 100
+    del self.pociones[pocion - 1]
 
   # getters de tipo, arma y pociones.
 

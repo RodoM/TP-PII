@@ -31,11 +31,11 @@ pocion5 = Pocion("Poción de Vitalidad", 40)
 pociones = [pocion1, pocion2, pocion3, pocion4, pocion5]
 
 # Personajes
-personaje1 = Personaje(nombre="Aragorn", genero="Masculino", ataque=3, defensa=2, vida=300, suerte=2, tipo=tipo1, arma=arma1, pociones=[pocion1])
-personaje2 = Personaje(nombre="Legolas", genero="Masculino", ataque=4, defensa=2, vida=300, suerte=1, tipo=tipo2, arma=arma2, pociones=[pocion1, pocion3])
-personaje3 = Personaje(nombre="Gimli", genero="Masculino", ataque=3, defensa=3, vida=200, suerte=2, tipo=tipo3, arma=arma3, pociones=[])
-personaje4 = Personaje(nombre="Eowyn", genero="Femenino", ataque=2, defensa=2, vida=300, suerte=3, tipo=tipo4, arma=arma4, pociones=[pocion3, pocion5])
-personaje5 = Personaje(nombre="Gandalf", genero="Masculino", ataque=1, defensa=3, vida=400, suerte=2, tipo=tipo5, arma=arma5, pociones=[pocion2, pocion4, pocion5])
+personaje1 = Personaje(nombre="Aragorn", genero="Masculino", ataque=3, defensa=2, vida=100, suerte=2, tipo=tipo1, arma=arma1, pociones=[pocion1])
+personaje2 = Personaje(nombre="Legolas", genero="Masculino", ataque=4, defensa=2, vida=100, suerte=1, tipo=tipo2, arma=arma2, pociones=[pocion1, pocion3])
+personaje3 = Personaje(nombre="Gimli", genero="Masculino", ataque=3, defensa=3, vida=100, suerte=2, tipo=tipo3, arma=arma3, pociones=[])
+personaje4 = Personaje(nombre="Eowyn", genero="Femenino", ataque=2, defensa=2, vida=100, suerte=3, tipo=tipo4, arma=arma4, pociones=[pocion3, pocion5])
+personaje5 = Personaje(nombre="Gandalf", genero="Masculino", ataque=1, defensa=3, vida=100, suerte=2, tipo=tipo5, arma=arma5, pociones=[pocion2, pocion4, pocion5])
 
 personajes = [personaje1, personaje2, personaje3, personaje4, personaje5]
 

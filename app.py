@@ -1,13 +1,14 @@
 from datos import *
-
+import random
 
 def menu():
   print("\n1. Mostrar personajes\n2. Crear nuevo personaje\n3. Seleccionar personaje\n4. Eliminar personaje\n5. Salir")
 
-def mostrar_personajes():
+def mostrar_personajes(id = 0):
   print("\n--- Listado de personajes ---")
   for personaje in personajes:
-    print(personaje)
+    if personaje.id != id:
+      print(personaje)
 
 def asignar_puntos(puntos, atributo):
   while puntos > 0:
@@ -86,7 +87,7 @@ def crear_personaje():
   print(f"Personaje {nombre} creado con éxito.")
 
 def menu_personaje():
-  print("\n1. Mostrar atributos\n2. Mostrar arma.\n3. Mostrar pociones.\n4. Pelear\n5. Salir")
+  print("\n1. Mostrar atributos\n2. Mostrar arma.\n3. Mostrar pociones.\n4. Pelear.\n5. Beber poción.\n6. Salir")
 
 def seleccionar_personaje():
   opt = int(input("Ingrese el ID del personaje que desea utilizar: "))
@@ -97,9 +98,16 @@ def seleccionar_personaje():
 
 def combate(atacante, defensor):
   daño = atacante.atacar()
+
+  if (random.random() < atacante.arma.probabilidad_critico):
+    daño *= 2
+    print(f"\n{atacante.nombre} realizó un golpe crítico a {defensor.nombre} con {atacante.arma.nombre} causando {daño} puntos de daño.")
+  else:
+    print(f"\n{atacante.nombre} atacó a {defensor.nombre} con {atacante.arma.nombre} causando {daño} de daño.")
+  
   defensor.recibir_ataque(daño)
-  print(f"{atacante.nombre} atacó a {defensor.nombre} con {atacante.arma.nombre} causando {daño} de daño.")
   print(f"{defensor.nombre} tiene {defensor.vida} de vida restante.")
+
   if defensor.vida <= 0:
     print(f"{defensor.nombre} ha sido derrotado.")
 
@@ -119,8 +127,10 @@ while True:
 
   if opt == "1":
     mostrar_personajes()
+
   elif opt == "2":
     crear_personaje()
+
   elif opt == "3":
     personaje_seleccionado = seleccionar_personaje()
     print(personaje_seleccionado)
@@ -131,14 +141,21 @@ while True:
 
       if opt2 == "1":
         print(personaje_seleccionado.mostrar_atributos())
+
       elif opt2 == "2":
         print(personaje_seleccionado.arma)
+
       elif opt2 == "3":
-        for i, pocion in enumerate(personaje_seleccionado.pociones, 1):
-          print(f"{i}. {pocion}")
+        if len(personaje_seleccionado.pociones) > 0:
+          for i, pocion in enumerate(personaje_seleccionado.pociones, 1):
+            print(f"{i}. {pocion}")
+        else:
+          print("No tiene pociones.")
+
       elif opt2 == "4":
         print("Seleccione el personaje al que desea atacar:")
-        mostrar_personajes()
+        mostrar_personajes(personaje_seleccionado.id)
+        # Se podría reutilizar la función seleccionar_personaje
         id_defensor = int(input("Ingrese el ID del personaje defensor: "))
         defensor = None
         for p in personajes:
@@ -147,17 +164,31 @@ while True:
             break
         if defensor:
           combate(personaje_seleccionado, defensor)
+          combate(defensor, personaje_seleccionado)
         else:
           print("ID de personaje no válido.")
+
       elif opt2 == "5":
+        pocion = int(input("Ingrese el ID de la poción que desea beber: "))
+        vida_inicial = personaje_seleccionado.vida
+        personaje_seleccionado.beber_pocion(pocion)
+        if vida_inicial < personaje_seleccionado.vida:
+          print("¡La poción no tuvo efecto!")
+        else:
+          print(f"{personaje_seleccionado.nombre} ha bebido una poción y su vida paso a {personaje_seleccionado.vida}")
+
+      elif opt2 == "6":
         personaje_seleccionado = None
+
       else:
         print("Opción inválida.")
 
   elif opt == "4":
     eliminar_personaje()
+
   elif opt == "5":
     print("Hasta luego!")
     break
+
   else:
     print("Opción inválida.")
