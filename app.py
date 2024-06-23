@@ -172,7 +172,7 @@ while True:
         pocion = int(input("Ingrese el ID de la poción que desea beber: "))
         vida_inicial = personaje_seleccionado.vida
         personaje_seleccionado.beber_pocion(pocion)
-        if vida_inicial < personaje_seleccionado.vida:
+        if vida_inicial == personaje_seleccionado.vida:
           print("¡La poción no tuvo efecto!")
         else:
           print(f"{personaje_seleccionado.nombre} ha bebido una poción y su vida paso a {personaje_seleccionado.vida}")
