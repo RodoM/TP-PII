@@ -24,17 +24,29 @@ class Personaje:
   def mostrar_atributos(self):
     return f"Ataque: {self.ataque}, Defensa: {self.defensa}, Vida: {self.vida}, Suerte: {self.suerte}"
   
-  def atacar(self):
-    # Calcular daño basado en atributos del personaje y su arma
-    return self.ataque + self.arma.daño
-
+  # Ver de hacer setter de vida
   def recibir_ataque(self, cantidad):
     self.vida -= cantidad - self.defensa  # El daño recibido se reduce por la defensa
     if self.vida < 0:
       self.vida = 0
+  
+  def combate(self, defensor):
+    daño = self.ataque + self.arma.daño
+
+    if (random.random() < self.arma.probabilidad_critico + self.suerte):
+      daño *= 2
+      print(f"\n{self.nombre} realizó un golpe crítico a {defensor.nombre} con {self.arma.nombre} causando {daño} puntos de daño.")
+    else:
+      print(f"\n{self.nombre} atacó a {defensor.nombre} con {self.arma.nombre} causando {daño} de daño.")
+    
+    defensor.recibir_ataque(daño)
+    print(f"{defensor.nombre} tiene {defensor.vida} de vida restante.")
+
+    if defensor.vida <= 0:
+      print(f"{defensor.nombre} ha sido derrotado.")
 
   def beber_pocion(self, pocion):
-    if random.random() > 0.20:
+    if random.random() > 0.20 - self.suerte:
       self.vida += self.pociones[pocion - 1].curacion
       if self.vida > 100:
         self.vida = 100

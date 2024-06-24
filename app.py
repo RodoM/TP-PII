@@ -51,8 +51,8 @@ def seleccionar_pociones():
   for i, pocion in enumerate(pociones, 1):
     print(f"{i}. {pocion}")
 
+  pociones_seleccionadas = []
   while True:
-    pociones_seleccionadas = []
     opt = int(input("Seleccione un/unas pociones para el personaje (0 para continuar): ")) - 1
     
     if opt == -1:
@@ -66,7 +66,7 @@ def crear_personaje():
   nombre = input("Ingrese el nombre del personaje: ")
   genero = input("Ingrese el genero del personaje: ")
   puntos = 10
-  atributos = ["Ataque", "Defensa", "Vida", "Suerte"]
+  atributos = ["Ataque", "Defensa", "Suerte"]
   valores_atributos = {}
 
   for atributo in atributos:
@@ -81,7 +81,7 @@ def crear_personaje():
   arma = seleccionar_arma()
   pociones_seleccionadas = seleccionar_pociones()
   
-  nuevo_personaje = Personaje(nombre=nombre, genero=genero, ataque=valores_atributos["ataque"], defensa=valores_atributos["defensa"], vida=valores_atributos["vida"], suerte=valores_atributos["suerte"], tipo=tipo, arma=arma, pociones=pociones_seleccionadas)
+  nuevo_personaje = Personaje(nombre=nombre, genero=genero, ataque=valores_atributos["ataque"], defensa=valores_atributos["defensa"], vida=100, suerte=valores_atributos["suerte"], tipo=tipo, arma=arma, pociones=pociones_seleccionadas)
   nuevo_personaje.aplicar_bonificaciones()
   personajes.append(nuevo_personaje)
   print(f"Personaje {nombre} creado con éxito.")
@@ -96,28 +96,13 @@ def seleccionar_personaje():
       return personaje
   print("No existe ningún personaje con ese ID.")
 
-def combate(atacante, defensor):
-  daño = atacante.atacar()
-
-  if (random.random() < atacante.arma.probabilidad_critico):
-    daño *= 2
-    print(f"\n{atacante.nombre} realizó un golpe crítico a {defensor.nombre} con {atacante.arma.nombre} causando {daño} puntos de daño.")
-  else:
-    print(f"\n{atacante.nombre} atacó a {defensor.nombre} con {atacante.arma.nombre} causando {daño} de daño.")
-  
-  defensor.recibir_ataque(daño)
-  print(f"{defensor.nombre} tiene {defensor.vida} de vida restante.")
-
-  if defensor.vida <= 0:
-    print(f"{defensor.nombre} ha sido derrotado.")
-
 def eliminar_personaje():
   opt = int(input("Ingrese el ID del personaje que desea eliminar: "))
   for personaje in personajes:
     if personaje.id == opt:
-        del personajes[opt - 1]
-        print("Se eliminó con éxito el personaje.")
-        return
+      del personajes[opt - 1]
+      print("Se eliminó con éxito el personaje.")
+      return
   print("No existe ningún personaje con ese ID.")
 
 
@@ -156,6 +141,7 @@ while True:
         print("Seleccione el personaje al que desea atacar:")
         mostrar_personajes(personaje_seleccionado.id)
         # Se podría reutilizar la función seleccionar_personaje
+        # Asegurar que no se pueda elegir al personaje que estas utiliazando
         id_defensor = int(input("Ingrese el ID del personaje defensor: "))
         defensor = None
         for p in personajes:
@@ -163,8 +149,8 @@ while True:
             defensor = p
             break
         if defensor:
-          combate(personaje_seleccionado, defensor)
-          combate(defensor, personaje_seleccionado)
+          personaje_seleccionado.combate(defensor)
+          defensor.combate(personaje_seleccionado)
         else:
           print("ID de personaje no válido.")
 
