@@ -6,10 +6,13 @@ def menu():
 
 # función para mostrar el listado de personajes.
 def mostrar_personajes(id: int = 0) -> None:
-  print("\n--- Listado de personajes ---")
-  for personaje in personajes:
-    if personaje.id != id and personaje.vida > 0:
-      print(personaje)
+  if len(personajes) > 0:
+    print("\n--- Listado de personajes ---")
+    for personaje in personajes:
+      if personaje.id != id and personaje.vida > 0:
+        print(personaje)
+  else:
+    print("No hay personajes disponibles.")
 
 # función que asigna 10 puntos a los atributos del personaje. 
 def asignar_puntos(puntos: int, atributo: str) -> None:
@@ -153,54 +156,60 @@ while True:
     crear_personaje()
 
   elif opt == "3":
-    personaje_seleccionado = seleccionar_personaje()
+    if len(personajes) > 0:
+      personaje_seleccionado = seleccionar_personaje()
 
-    while personaje_seleccionado:
-      menu_personaje()
-      opt2 = input("Seleccione una opción: ")
+      while personaje_seleccionado:
+        menu_personaje()
+        opt2 = input("Seleccione una opción: ")
 
-      if opt2 == "1":
-        print(personaje_seleccionado.mostrar_atributos())
+        if opt2 == "1":
+          print(personaje_seleccionado.mostrar_atributos())
 
-      elif opt2 == "2":
-        print(personaje_seleccionado.arma)
+        elif opt2 == "2":
+          print(personaje_seleccionado.arma)
 
-      elif opt2 == "3":
-        if len(personaje_seleccionado.pociones) > 0:
-          for i, pocion in enumerate(personaje_seleccionado.pociones, 1):
-            print(f"{i}. {pocion}")
+        elif opt2 == "3":
+          if len(personaje_seleccionado.pociones) > 0:
+            for i, pocion in enumerate(personaje_seleccionado.pociones, 1):
+              print(f"{i}. {pocion}")
+          else:
+            print("No tiene pociones.")
+
+        elif opt2 == "4":
+          if len(personajes) > 1:
+            mostrar_personajes(personaje_seleccionado.id)
+            defensor = seleccionar_personaje(personaje_seleccionado.id)
+            if defensor:
+              combate(personaje_seleccionado, defensor)
+              if defensor.vida > 0:
+                combate(defensor, personaje_seleccionado)
+              else:
+                print(f"{defensor.nombre} ha sido derrotado.")
+          else:
+            print("Debe haber al menos 2 personajes disponibles para realizar un combate.")
+
+
+        elif opt2 == "5":
+          try:
+            pocion = int(input("Ingrese la poción que desea beber: "))
+            curacion = personaje_seleccionado.pociones[pocion - 1].utilizar()
+            if curacion == 0:
+              print("¡La poción no tuvo efecto!")
+            else:
+              personaje_seleccionado.vida = curacion
+              print(f"{personaje_seleccionado.nombre} ha bebido una poción y su vida paso a {personaje_seleccionado.vida}")
+            del personaje_seleccionado.pociones[pocion - 1]
+          except:
+            print("Opción inválida.")
+
+        elif opt2 == "6":
+          personaje_seleccionado = None
+
         else:
-          print("No tiene pociones.")
-
-      elif opt2 == "4":
-        mostrar_personajes(personaje_seleccionado.id)
-        defensor = seleccionar_personaje(personaje_seleccionado.id)
-        if defensor:
-          combate(personaje_seleccionado, defensor)
-          if defensor.vida > 0:
-            combate(defensor, personaje_seleccionado)
-          else:
-            print(f"{defensor.nombre} ha sido derrotado.")
-
-
-      elif opt2 == "5":
-        try:
-          pocion = int(input("Ingrese la poción que desea beber: "))
-          curacion = personaje_seleccionado.pociones[pocion - 1].utilizar()
-          if curacion == 0:
-            print("¡La poción no tuvo efecto!")
-          else:
-            personaje_seleccionado.vida = curacion
-            print(f"{personaje_seleccionado.nombre} ha bebido una poción y su vida paso a {personaje_seleccionado.vida}")
-          del personaje_seleccionado.pociones[pocion - 1]
-        except:
           print("Opción inválida.")
-
-      elif opt2 == "6":
-        personaje_seleccionado = None
-
-      else:
-        print("Opción inválida.")
+    else:
+      print("No hay personajes disponibles. Primero debe crear uno")
 
   elif opt == "4":
     eliminar_personaje()
