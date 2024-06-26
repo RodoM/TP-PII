@@ -176,9 +176,9 @@ while True:
         mostrar_personajes(personaje_seleccionado.id)
         defensor = seleccionar_personaje(personaje_seleccionado.id)
         if defensor:
-          personaje_seleccionado.combate(defensor)
+          combate(personaje_seleccionado, defensor)
           if defensor.vida > 0:
-            defensor.combate(personaje_seleccionado)
+            combate(defensor, personaje_seleccionado)
           else:
             print(f"{defensor.nombre} ha sido derrotado.")
 
