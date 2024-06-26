@@ -4,11 +4,11 @@ from pocion import Pocion
 from personaje import Personaje
 
 # Tipos
-tipo1 = Tipo(nombre="Guerrero", bonif_ataque=1.2, bonif_defensa=1.1, bonif_vida=0.9, bonif_suerte=1.0)
-tipo2 = Tipo(nombre="Arquero", bonif_ataque=1.3, bonif_defensa=0.8, bonif_vida=0.9, bonif_suerte=1.1)
-tipo3 = Tipo(nombre="Mago", bonif_ataque=1.0, bonif_defensa=0.9, bonif_vida=1.0, bonif_suerte=1.2)
-tipo4 = Tipo(nombre="Tanque", bonif_ataque=0.8, bonif_defensa=1.4, bonif_vida=1.2, bonif_suerte=0.9)
-tipo5 = Tipo(nombre="Asesino", bonif_ataque=1.5, bonif_defensa=0.7, bonif_vida=0.8, bonif_suerte=1.0)
+tipo1 = Tipo(nombre="Guerrero", bonif_ataque=1.2, bonif_defensa=1.1, bonif_vida=0.9)
+tipo2 = Tipo(nombre="Arquero", bonif_ataque=1.3, bonif_defensa=0.8, bonif_vida=0.9)
+tipo3 = Tipo(nombre="Mago", bonif_ataque=1.0, bonif_defensa=0.9, bonif_vida=1.0)
+tipo4 = Tipo(nombre="Tanque", bonif_ataque=0.8, bonif_defensa=1.4, bonif_vida=1.2)
+tipo5 = Tipo(nombre="Asesino", bonif_ataque=1.5, bonif_defensa=0.7, bonif_vida=0.8)
 
 tipos = [tipo1, tipo2, tipo3, tipo4, tipo5]
 
@@ -31,11 +31,11 @@ pocion5 = Pocion("Poción de Vitalidad", 40)
 pociones = [pocion1, pocion2, pocion3, pocion4, pocion5]
 
 # Personajes
-personaje1 = Personaje(nombre="Aragorn", genero="Masculino", ataque=3, defensa=2, suerte=2, tipo=tipo1, arma=arma1, pociones=[pocion1])
-personaje2 = Personaje(nombre="Legolas", genero="Masculino", ataque=4, defensa=2, suerte=1, tipo=tipo2, arma=arma2, pociones=[pocion1, pocion3])
-personaje3 = Personaje(nombre="Gimli", genero="Masculino", ataque=3, defensa=3, suerte=2, tipo=tipo3, arma=arma3, pociones=[])
-personaje4 = Personaje(nombre="Eowyn", genero="Femenino", ataque=2, defensa=2, suerte=3, tipo=tipo4, arma=arma4, pociones=[pocion3, pocion5])
-personaje5 = Personaje(nombre="Gandalf", genero="Masculino", ataque=1, defensa=3, suerte=2, tipo=tipo5, arma=arma5, pociones=[pocion2, pocion4, pocion5])
+personaje1 = Personaje(nombre="Aragorn", genero="Masculino", ataque=3, defensa=2, tipo=tipo1, arma=arma1, pociones=[pocion1])
+personaje2 = Personaje(nombre="Legolas", genero="Masculino", ataque=4, defensa=2, tipo=tipo2, arma=arma2, pociones=[pocion1, pocion3])
+personaje3 = Personaje(nombre="Gimli", genero="Masculino", ataque=3, defensa=3, tipo=tipo3, arma=arma3, pociones=[])
+personaje4 = Personaje(nombre="Eowyn", genero="Femenino", ataque=2, defensa=2, tipo=tipo4, arma=arma4, pociones=[pocion3, pocion5])
+personaje5 = Personaje(nombre="Gandalf", genero="Masculino", ataque=1, defensa=3, tipo=tipo5, arma=arma5, pociones=[pocion2, pocion4, pocion5])
 
 personajes = [personaje1, personaje2, personaje3, personaje4, personaje5]
 

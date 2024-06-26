@@ -1,3 +1,5 @@
+import random
+
 class Pocion:
   id_inicial = 1
   def __init__(self, nombre: str, curacion: int) -> None:
@@ -17,6 +19,13 @@ class Pocion:
   @property
   def curacion(self) -> int:
     return self.__curacion
+  
+  # función que simula utilizar una poción, tiene una probabilidad de 20% de no tener efecto.
+  def utilizar(self) -> int:
+    if random.random() < 0.20:
+      return self.curacion
+    else:
+       return 0
 
   def __str__(self) -> str:
     return f"'{self.nombre}' curación: {self.curacion}."
