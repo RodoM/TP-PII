@@ -134,7 +134,7 @@ def eliminar_personaje() -> None:
     opt = int(input("Ingrese el ID del personaje que desea eliminar: "))
     for personaje in personajes:
       if personaje.id == opt:
-        del personajes[opt - 1]
+        personajes.remove(personaje)
         print("Se eliminó con éxito el personaje.")
         return
     print("No existe ningún personaje con ese ID.")
