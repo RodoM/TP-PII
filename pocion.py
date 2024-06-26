@@ -22,7 +22,7 @@ class Pocion:
   
   # función que simula utilizar una poción, tiene una probabilidad de 20% de no tener efecto.
   def utilizar(self) -> int:
-    if random.random() < 0.20:
+    if random.random() < 0.80:
       return self.curacion
     else:
        return 0
